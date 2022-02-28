@@ -1,0 +1,53 @@
+﻿@model IEnumerable<PasteB.Models.PasteBinModel>
+
+    <div class="container p-3">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h2 class="text-primary">Lista PasteBin</h2>
+            </div>
+            <div class="col-6 text-right">
+                <a asp-controller="PasteBin" asp-action="Create" class="btn btn-primary">Dodaj nowy PasteBin</a>
+            </div>
+        </div>
+        <br />
+
+        @if(Model.Count() > 0)
+            {
+                <table class="table table-bordered table-striped" style="width:100%">
+                    <thead>
+                        <tr>    
+                            <th>Tytuł</th>
+
+                            <th>Autor</th>
+
+                            <th>Opcje</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       @foreach (var cos in Model) 
+                        { 
+                            <tr>
+                                <td width="30%">@cos.Tytul</td>
+                                <td width="45%">@cos.Autor</td>
+                                <td width="25%">
+                                    <div class="w-100 btn-group" role="group">
+                                        <a asp-controller="PasteBin" asp-action="Update" asp-route-Id="@cos.Id" class="btn btn-primary">Zaktualizuj</a>
+                                        <a asp-controller="PasteBin" asp-action="Delete" asp-route-Id="@cos.Id" class="btn btn-danger">Usuń</a>
+                                        <a asp-controller="PasteBin" asp-action="Display" asp-route-Id="@cos.Id" class="btn btn-secondary">Wyświetl</a>
+                                    </div>
+                                </td>
+                                    
+                            </tr>
+                        }
+                            
+                    </tbody>
+                </table> 
+            }
+            else
+            {
+                <p>Nie ma jeszcze ani jednego PasteBin</p>
+            }
+
+
+    </div>
+
